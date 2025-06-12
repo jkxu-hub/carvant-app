@@ -1,0 +1,147 @@
+﻿@page "/"
+@using CarvantApp.Client.Components
+@using CarvantApp.Shared.ViewModels;
+@inject HttpClient Http
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<PageTitle>Locations</PageTitle>
+
+<h1>Locations</h1>
+
+<p>Locations from Carvant Financial</p>
+
+@if (locations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudButton @onclick="()=> OpenAddDialog()" Variant="Variant.Filled" Color="Color.Primary">
+        Add
+    </MudButton>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Zip</th>
+                <th>City</th>
+                <th>State</th>
+                <th>County</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>id</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var location in locations)
+            {
+                <tr>
+                    <td>@location.Zip</td>
+                    <td>@location.City</td>
+                    <td>@location.State</td>
+                    <td>@location.County</td>
+                    <td>@location.Latitude</td>
+                    <td>@location.Longtitude</td>
+                    <td>@location.Id</td>
+                    <td>
+                        <MudButton @onclick="() => OpenEditDialog(location)" Variant="Variant.Filled" Color="Color.Primary">
+                            Edit
+                        </MudButton>
+                        <MudButton @onclick="() => DeleteLocation(location.Id)" Variant="Variant.Filled" Color="Color.Error">
+                            Delete
+                        </MudButton>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    private List<LocationViewModel> locations;
+    private LocationViewModel newLocation = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        locations = await Http.GetFromJsonAsync<List<LocationViewModel>>("Home/GetLocations");
+    }
+
+    private async Task AddLocation(LocationViewModel location)
+    {
+        var response = await Http.PostAsJsonAsync("Home/AddLocation", location);
+        if (response.IsSuccessStatusCode)
+        {
+            var newId = await response.Content.ReadFromJsonAsync<int>();
+            location.Id = newId;
+            locations.Add(location);
+            newLocation = new();
+            StateHasChanged();
+            Snackbar.Add("Added Location", Severity.Success);
+        }
+        else
+        {
+            Console.Error.WriteLine("Failed to add location.");
+            Snackbar.Add("Failed to add location.", Severity.Error);
+        }
+    }
+
+    private async Task EditLocation(LocationViewModel location)
+    {
+        var response = await Http.PutAsJsonAsync("Home/EditLocation", location);
+        if (response.IsSuccessStatusCode)
+        {
+            Snackbar.Add("Edited Location", Severity.Success);
+            StateHasChanged();
+        }
+        else
+        {
+            Console.Error.WriteLine("Failed to edit location.");
+            Snackbar.Add("Failed to edit location.", Severity.Error);
+        }
+    }
+
+    private async Task DeleteLocation(int id)
+    {
+        var response = await Http.DeleteAsync($"Home/DeleteLocation/{id}");
+        if (response.IsSuccessStatusCode)
+        {
+            locations.Remove(locations.FirstOrDefault(loc => loc.Id == id));
+            Snackbar.Add("Deleted Location", Severity.Success);
+            StateHasChanged();
+        }
+        else
+        {
+            Console.Error.WriteLine("Failed to delete location.");
+            Snackbar.Add("Failed to delete location.", Severity.Error);
+        }
+    }
+
+    private Task OpenAddDialog()
+    {
+        var options = new DialogOptions { CloseButton = true, CloseOnEscapeKey = true };
+
+        var parameters = new DialogParameters
+        {
+            { nameof(LocationForm.Location), newLocation },
+            { nameof(LocationForm.HandleValidSubmit), EventCallback.Factory.Create<LocationViewModel>(this, AddLocation)}
+        };
+
+        return DialogService.ShowAsync<LocationForm>("Simple Dialog", parameters, options);
+    }
+
+    private Task OpenEditDialog(LocationViewModel location)
+    {
+        var options = new DialogOptions { CloseButton = true, CloseOnEscapeKey = true };
+
+        var parameters = new DialogParameters
+        {
+            { nameof(LocationForm.Location), location },
+            { nameof(LocationForm.HandleValidSubmit), EventCallback.Factory.Create<LocationViewModel>(this, EditLocation)}
+        };
+
+        return DialogService.ShowAsync<LocationForm>("Simple Dialog", parameters, options);
+    }
+
+
+}

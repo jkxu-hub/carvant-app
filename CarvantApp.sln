@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarvantApp.Server", "CarvantApp.Server\CarvantApp.Server.csproj", "{57A90089-E265-4B5E-84F8-0489314A6E09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarvantApp.Client", "CarvantApp.Client\CarvantApp.Client.csproj", "{FD23C7D2-165A-43E2-86EF-C9F7358BF999}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarvantApp.Shared", "CarvantApp.Shared\CarvantApp.Shared.csproj", "{9D483E5A-BEE8-44A4-94F0-FCB4B173CAF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarvantApp.Data", "CarvantApp.Data\CarvantApp.Data.csproj", "{812E4590-2A43-44DA-86B6-072A9032A900}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57A90089-E265-4B5E-84F8-0489314A6E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A90089-E265-4B5E-84F8-0489314A6E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A90089-E265-4B5E-84F8-0489314A6E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A90089-E265-4B5E-84F8-0489314A6E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD23C7D2-165A-43E2-86EF-C9F7358BF999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD23C7D2-165A-43E2-86EF-C9F7358BF999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD23C7D2-165A-43E2-86EF-C9F7358BF999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD23C7D2-165A-43E2-86EF-C9F7358BF999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D483E5A-BEE8-44A4-94F0-FCB4B173CAF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D483E5A-BEE8-44A4-94F0-FCB4B173CAF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D483E5A-BEE8-44A4-94F0-FCB4B173CAF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D483E5A-BEE8-44A4-94F0-FCB4B173CAF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{812E4590-2A43-44DA-86B6-072A9032A900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{812E4590-2A43-44DA-86B6-072A9032A900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{812E4590-2A43-44DA-86B6-072A9032A900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{812E4590-2A43-44DA-86B6-072A9032A900}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

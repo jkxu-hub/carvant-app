@@ -1,5 +1,6 @@
 # carvant-app
 application for carvant. Demo of crud functionalities.
+![image](https://github.com/user-attachments/assets/c0bf2d6c-e401-4009-b3a6-67c079c0b953)
 
 # Run the app
 * dotnet run --project CarvantApp.Server
